@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { CiChat1, CiCircleInfo, CiCirclePlus } from "react-icons/ci";
@@ -11,7 +12,14 @@ const MainContainer = ({ children }: { children: React.ReactNode }) => {
     <>
       <header>
         <nav>
-          <a>Home</a>
+          <Link href={`/${lng}`}>
+            <Image
+              src="/assets/image/logo.png"
+              alt="logo"
+              width={75}
+              height={75}
+            />
+          </Link>
         </nav>
       </header>
       {children}
