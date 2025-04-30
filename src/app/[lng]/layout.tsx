@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import "@/styles/global.css";
 import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer } from "react-toastify";
 import ToastProvider from "./_components/ToastProvider";
 import GlobalProvider from "./_components/GlobalProvider";
 import MainContainer from "./_components/MainContainer";
