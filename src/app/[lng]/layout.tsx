@@ -4,6 +4,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import ToastProvider from "./_components/ToastProvider";
 import GlobalProvider from "./_components/GlobalProvider";
+import MainContainer from "./_components/MainContainer";
+import RightSidePannel from "./_components/RightSidePannel";
 
 export const metadata: Metadata = {
   title: "monochat",
@@ -15,23 +17,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
-      <body className="flex size-full overflow-hidden text-slate-900">
+    <html className="size-full" style={{ height: "100dvh" }}>
+      <body className="flex size-full overflow-hidden text-slate-900 justify-center fade-1s">
         <GlobalProvider>
           <ToastContainer />
           <ToastProvider />
-          {children}
+          <div className="flex-1 max-h-cdvh relative flex h-full w-fit max-w-screen-xl">
+            <div className="relative flex size-full flex-1 flex-col overflow-hidden text-slate-900 border-solid border-t border-t-slate-100">
+              <MainContainer>{children}</MainContainer>
+            </div>
+            <div className="relative flex size-full flex-1 flex-col overflow-hidden text-slate-900 border-solid border-t border-t-slate-100">
+              <RightSidePannel />
+            </div>
+          </div>
         </GlobalProvider>
       </body>
     </html>
   );
 }
-
-// zustand
-// react-query
-// indexeddb
-// pusher
-// i18n
-// tailwindcss
-// axios
-// nextauth
