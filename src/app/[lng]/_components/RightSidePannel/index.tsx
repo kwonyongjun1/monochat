@@ -11,7 +11,7 @@ const RightSidePannel = () => {
     <>
       <header>
         <nav>
-          <a className="text-xl font-bold float-right p-4 border-t border-t-slate-100">
+          <a className="text-2xl font-bold border-t border-t-slate-100">
             {lng}
           </a>
         </nav>
