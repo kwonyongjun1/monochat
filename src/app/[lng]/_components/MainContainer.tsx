@@ -11,13 +11,13 @@ const MainContainer = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <header>
-        <nav>
+        <nav className="w-16 h-16">
           <Link href={`/${lng}`}>
             <Image
               src="/assets/image/logo.png"
               alt="logo"
-              width={65}
-              height={65}
+              width={64}
+              height={64}
             />
           </Link>
         </nav>
