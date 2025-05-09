@@ -7,11 +7,9 @@ const Page = () => {
   useWelcomeNotify();
 
   return (
-    <main className="flex size-full flex-col overflow-auto animate-duration-150">
-      <article className="flex min-h-full flex-col">
-        <ChatList />
-      </article>
-    </main>
+    <article className="overflow-auto">
+      <ChatList />
+    </article>
   );
 };
 
