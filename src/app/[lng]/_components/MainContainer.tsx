@@ -1,30 +1,33 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
-import { useParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import BottomNav from "./BottomNav";
+import HeaderNav from "./HeaderNav";
 
 const MainContainer = ({ children }: { children: React.ReactNode }) => {
-  const { lng } = useParams();
+  const pathname = usePathname();
+
+  const headerNavVisiblePaths = [
+    /^\/[^/]+$/, // ${lng}
+    /^\/[^/]+\/invite$/, // ${lng}/invite
+    /^\/[^/]+\/info$/, // ${lng}/info
+  ];
+  const bottomNavVisiblePaths = [
+    /^\/[^/]+$/, // ${lng}
+    /^\/[^/]+\/invite$/, // ${lng}/invite
+    /^\/[^/]+\/info$/, // ${lng}/info
+  ];
+
+  const isBottomNavVisible = bottomNavVisiblePaths.some((pattern) =>
+    pattern.test(pathname)
+  );
 
   return (
     <>
-      <header>
-        <nav className="w-16 h-16">
-          <Link href={`/${lng}`}>
-            <Image
-              src="/assets/image/logo.png"
-              alt="logo"
-              width={64}
-              height={64}
-            />
-          </Link>
-        </nav>
-      </header>
-      {children}
+      <header>{headerNavVisiblePaths && <HeaderNav />}</header>
+      <main className="size-full">{children}</main>
       <footer className="w-full max-w-screen-sm">
-        <BottomNav />
+        {isBottomNavVisible && <BottomNav />}
       </footer>
     </>
   );
