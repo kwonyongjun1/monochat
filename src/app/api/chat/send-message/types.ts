@@ -8,6 +8,7 @@ export type SendMessageResponse = CommonResponse<MessageInfo>;
 export interface MessageInfo {
   roomId: string;
   senderId: string;
+  senderName: string;
   message: string;
   type: MessageType;
   createdAt: string;
