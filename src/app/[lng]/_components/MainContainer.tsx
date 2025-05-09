@@ -22,9 +22,13 @@ const MainContainer = ({ children }: { children: React.ReactNode }) => {
     pattern.test(pathname)
   );
 
+  const isHeaderNavVisible = headerNavVisiblePaths.some((pattern) =>
+    pattern.test(pathname)
+  );
+
   return (
     <>
-      <header>{headerNavVisiblePaths && <HeaderNav />}</header>
+      <header>{isHeaderNavVisible && <HeaderNav />}</header>
       <main className="size-full">{children}</main>
       <footer className="w-full max-w-screen-sm">
         {isBottomNavVisible && <BottomNav />}
