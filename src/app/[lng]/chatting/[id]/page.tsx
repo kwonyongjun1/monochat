@@ -6,6 +6,8 @@ import { PRIVATE_ENV, CHAT_EVENT } from "@/constants";
 import Pusher from "pusher-js";
 import { sendMessage } from "@/app/fetchs/sendMessage";
 import { MessageInfo } from "@/app/api/chat/send-message/types";
+import { GrSend } from "react-icons/gr";
+import { RiArrowGoBackFill } from "react-icons/ri";
 
 const Chatting = () => {
   const { id } = useParams();
@@ -48,24 +50,60 @@ const Chatting = () => {
 
   return (
     <div className="size-full flex flex-col">
-      <div className="w-full">
-        <button onClick={back}>뒤로가즈아</button>
-        <button
-          onClick={() => {
-            onSend();
-          }}
-        >
-          Send Message
-        </button>
-      </div>
-      <div className="size-full">
-        Chatting {id}
-        {message.map((msg, index) => (
-          <div key={index}>{msg}</div>
-        ))}
-      </div>
+      <header className="w-full">
+        <div className="p-2">
+          <button onClick={back}>
+            <RiArrowGoBackFill size={20} />
+          </button>
+        </div>
+      </header>
+      <main className="size-full">
+        <article>
+          {MESSAGE_LIST.map((message, index) => (
+            <div key={index}>{message.message}</div>
+          ))}
+        </article>
+      </main>
+      <footer className="w-full">
+        <div className="p-3">
+          <form className="flex items-center justify-center gap-2">
+            <div className="flex w-full border-2 border-black rounded-lg items-center p-1">
+              <textarea
+                className="w-full overflow-hidden"
+                placeholder="메시지를 입력하세요."
+                style={{ height: "20px" }}
+              />
+            </div>
+            <button
+              onClick={(event) => {
+                event.preventDefault();
+                onSend();
+              }}
+            >
+              <div className="p-2 rounded-full bg-primary border-2 border-black transition-transform duration-300 transform hover:scale-110">
+                <GrSend size={20} />
+              </div>
+            </button>
+          </form>
+        </div>
+      </footer>
     </div>
   );
 };
 
 export default Chatting;
+
+const MESSAGE_LIST = [
+  {
+    readBy: ["1", "2"],
+    message: "안녕하세요",
+    createdAt: "2021-01-01 12:00:00",
+    senderId: "1",
+  },
+  {
+    readBy: ["1", "2"],
+    message: "ㅎㅇ",
+    createdAt: "2021-01-01 12:00:00",
+    senderId: "2",
+  },
+];
