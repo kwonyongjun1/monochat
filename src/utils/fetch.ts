@@ -25,3 +25,20 @@ export async function fetchWithHandling<T>(
     throw error;
   }
 }
+
+export const filterSearchParams = ({
+  searchParams,
+  filterKeys,
+}: {
+  searchParams: URLSearchParams;
+  filterKeys: string[];
+}): Record<string, unknown> => {
+  const result: Record<string, unknown> = {};
+  filterKeys.forEach((key) => {
+    const value = searchParams.get(key);
+    if (value) {
+      result[key] = value;
+    }
+  });
+  return result;
+};

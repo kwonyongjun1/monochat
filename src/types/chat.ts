@@ -1,6 +1,6 @@
 export interface ChatRoomInfo {
-  id: number;
-  name: string;
+  chatId: number;
+  title: string;
   lastMessage: string;
-  time: string;
+  lastDate: string;
 }
