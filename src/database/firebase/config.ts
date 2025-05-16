@@ -1,5 +1,4 @@
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 import { PRIVATE_ENV } from "@/constants";
 import { getFirestore } from "firebase/firestore";
 
@@ -15,6 +14,6 @@ const firebaseConfig = {
 
 export const app = initializeApp(firebaseConfig);
 
-export const analytics = getAnalytics(app);
+// export const analytics = getAnalytics(app);
 
 export const firebaseStore = getFirestore(app);
