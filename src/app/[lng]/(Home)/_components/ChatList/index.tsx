@@ -18,16 +18,16 @@ const ChatList = () => {
 
   const chatList: ChatRoomInfo[] = [
     {
-      id: 1,
-      name: "John Doe",
+      chatId: 1,
+      title: "John Doe",
       lastMessage: "Hello, world!",
-      time: "2021-01-01 12:00:00",
+      lastDate: "2021-01-01 12:00:00",
     },
     {
-      id: 2,
-      name: "Jane Doe",
+      chatId: 2,
+      title: "Jane Doe",
       lastMessage: "Hello, world!",
-      time: "2021-01-01 12:00:00",
+      lastDate: "2021-01-01 12:00:00",
     },
   ];
 
@@ -38,7 +38,7 @@ const ChatList = () => {
   return (
     <>
       {chatList.map((chatRoomInfo) => (
-        <div key={chatRoomInfo.id}>
+        <div key={chatRoomInfo.chatId}>
           <ChatRoomCard
             chatRoomInfo={chatRoomInfo}
             onClick={() => onOpen(chatRoomInfo)}
