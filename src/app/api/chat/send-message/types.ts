@@ -1,4 +1,5 @@
 import { CommonResponse } from "@/app/api/types";
+import { Timestamp } from "@/types/chat";
 
 export type SendMessageRequest = MessageInfo;
 
@@ -10,5 +11,5 @@ export interface MessageInfo {
   senderName: string;
   message: string;
   type: string;
-  createdAt: string;
+  createdAt: Timestamp;
 }
