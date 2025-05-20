@@ -36,7 +36,7 @@ const ChatList = () => {
   return (
     <>
       {chatRoomList.map((chatRoomInfo) => (
-        <div key={chatRoomInfo.chatId}>
+        <div key={chatRoomInfo.roomId}>
           <ChatRoomCard
             chatRoomInfo={chatRoomInfo}
             onClick={() => onOpen(chatRoomInfo)}

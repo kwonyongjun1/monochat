@@ -20,13 +20,13 @@ export const GET = async (request: NextRequest) => {
     const joinedChatRoomIds = await getJoinedChatRoomIds(userId);
     const q = query(
       collection(firebaseStore, "chat"),
-      where("chatId", "in", joinedChatRoomIds)
+      where("roomId", "in", joinedChatRoomIds)
     );
     const querySnapshot = await getDocs(q);
     const chatRooms: ChatRoomInfo[] = querySnapshot.docs.map((doc) => {
       const chatRoom = doc.data();
       return {
-        chatId: chatRoom.chatId,
+        roomId: chatRoom.roomId,
         lastDate: chatRoom.lastDate,
         lastMessage: chatRoom.lastMessage,
         title: chatRoom.title,
@@ -48,9 +48,7 @@ const getJoinedChatRoomIds = async (userId: string): Promise<string[]> => {
     where("userId", "==", userId)
   );
   const querySnapshot = await getDocs(q);
-  const joinedChatRoomIds = querySnapshot.docs.map(
-    (doc) => doc.data().chatRoomId
-  );
+  const joinedChatRoomIds = querySnapshot.docs.map((doc) => doc.data().roomId);
 
   return joinedChatRoomIds;
 };

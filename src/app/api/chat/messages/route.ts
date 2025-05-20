@@ -4,19 +4,19 @@ import {
   createSuccessResponse,
 } from "@/utils/api/response";
 import { getDocs } from "firebase/firestore";
-import { collection, where } from "firebase/firestore";
+import { collection } from "firebase/firestore";
 import { filterSearchParams } from "@/utils/fetch";
-import { query } from "firebase/firestore";
 import { NextRequest } from "next/server";
 import { MessageInfo } from "./types";
+import { getChatRoomDocId } from "..";
 
 export const GET = async (request: NextRequest) => {
   try {
-    const { chatId } = filterSearchParams({
+    const { roomId } = filterSearchParams({
       searchParams: request.nextUrl.searchParams,
-      filterKeys: ["chatId"],
-    }) as { chatId: string };
-    const docId = await getChatRoomDocId(chatId);
+      filterKeys: ["roomId"],
+    }) as { roomId: string };
+    const docId = await getChatRoomDocId(roomId);
 
     const messagesQuery = collection(firebaseStore, `chat/${docId}/messages`);
     const messagesSnapshot = await getDocs(messagesQuery);
@@ -38,19 +38,4 @@ export const GET = async (request: NextRequest) => {
       message: "Failed to fetch chat messages",
     });
   }
-};
-
-const getChatRoomDocId = async (chatId: string): Promise<string | null> => {
-  const chatQuery = query(
-    collection(firebaseStore, "chat"),
-    where("chatId", "==", chatId)
-  );
-  const chatSnapshot = await getDocs(chatQuery);
-
-  if (chatSnapshot.empty) {
-    return null;
-  }
-
-  const chatDocId = chatSnapshot.docs[0].id;
-  return chatDocId;
 };

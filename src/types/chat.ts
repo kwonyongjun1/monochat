@@ -1,5 +1,5 @@
 export interface ChatRoomInfo {
-  chatId: number;
+  roomId: number;
   title: string;
   lastMessage: string;
   lastDate: Timestamp;

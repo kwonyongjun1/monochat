@@ -2,11 +2,11 @@ import { GetMessageResponse } from "@/app/api/chat/messages/types";
 import { objectToURLSearchParams, fetchWithHandling } from "@/utils/fetch";
 
 export const getChatRoomMessage = async (
-  chatId: string
+  roomId: string
 ): Promise<GetMessageResponse> => {
   const apiPath = "/api/chat/messages";
   const searchParams = objectToURLSearchParams({
-    chatId,
+    roomId,
   });
   const apiUrl = `${apiPath}?${searchParams}`;
 
