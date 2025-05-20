@@ -3,7 +3,9 @@ import ChatRoomCard from "./_components/ChatRoomCard";
 import EmptyChatList from "./_components/EmptyChatList";
 import BottomDrawer from "./_components/BottomDrawer";
 import { ChatRoomInfo } from "@/types/chat";
-
+import { useQuery } from "@tanstack/react-query";
+import { getChatRooms } from "@/app/fetchs/chat/getChatRooms";
+import LoadingChatList from "./_components/LoadingChatList";
 const ChatList = () => {
   const [selectedChatRoom, setSelectedChatRoom] = useState<ChatRoomInfo | null>(
     null
@@ -16,28 +18,24 @@ const ChatList = () => {
     setSelectedChatRoom(null);
   };
 
-  const chatList: ChatRoomInfo[] = [
-    {
-      chatId: 1,
-      title: "John Doe",
-      lastMessage: "Hello, world!",
-      lastDate: "2021-01-01 12:00:00",
-    },
-    {
-      chatId: 2,
-      title: "Jane Doe",
-      lastMessage: "Hello, world!",
-      lastDate: "2021-01-01 12:00:00",
-    },
-  ];
+  const { data: chatRoom, isLoading } = useQuery({
+    queryKey: ["chat-list"],
+    queryFn: () => getChatRooms("admin"),
+  });
 
-  if (!chatList.length) {
+  const chatRoomList = chatRoom?.data;
+
+  if (isLoading) {
+    return <LoadingChatList />;
+  }
+
+  if (!chatRoomList?.length) {
     return <EmptyChatList />;
   }
 
   return (
     <>
-      {chatList.map((chatRoomInfo) => (
+      {chatRoomList.map((chatRoomInfo) => (
         <div key={chatRoomInfo.chatId}>
           <ChatRoomCard
             chatRoomInfo={chatRoomInfo}

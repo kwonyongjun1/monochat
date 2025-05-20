@@ -8,7 +8,7 @@ const ChatRoomCard = ({ chatRoomInfo, onClick }: ChatRoomCardProps) => {
   return (
     <article
       data-id={chatRoomInfo.chatId}
-      className="p-4 border-b border-gray-200 hover:bg-gray-100 flex place-content-between flex-wrap cursor-pointer"
+      className="px-4 py-3 border-b border-gray-200 hover:bg-gray-100 flex place-content-between flex-wrap cursor-pointer"
       onClick={onClick}
     >
       <div>
@@ -17,7 +17,7 @@ const ChatRoomCard = ({ chatRoomInfo, onClick }: ChatRoomCardProps) => {
           {chatRoomInfo.lastMessage || "\u00A0"}
         </p>
       </div>
-      <p className="text-xs text-gray-500">{chatRoomInfo.lastDate}</p>
+      {/* <p className="text-xs text-gray-500">{chatRoomInfo.lastDate}</p> */}
     </article>
   );
 };
