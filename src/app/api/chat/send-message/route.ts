@@ -1,21 +1,41 @@
 import { NextRequest } from "next/server";
-import { CHAT_EVENT, STATE } from "@/constants";
+import { STATE } from "@/constants";
 import pusher from "@/utils/pusher";
 import { SendMessageRequest, SendMessageResponse } from "./types";
 import {
   createErrorResponse,
   createSuccessResponse,
 } from "@/utils/api/response";
+import { getChatRoomDocId } from "..";
+import { addDoc, collection } from "firebase/firestore";
+import { firebaseStore } from "@/database/firebase/config";
 
 export const POST = async (request: NextRequest) => {
   try {
-    const pusherData: SendMessageRequest = await request.json();
-    // TODO "chat-channel" -> roomId로 변경
-    // const { roomId } = body;
-    await pusher.trigger("chat-channel", CHAT_EVENT.NEW_MESSAGE, pusherData);
+    const {
+      roomId,
+      senderId,
+      message,
+      type,
+      createdAt,
+      readBy,
+    }: SendMessageRequest = await request.json();
+
+    const messageData = {
+      createdAt,
+      message,
+      senderId,
+      readBy,
+    };
+
+    const docId = await getChatRoomDocId(roomId);
+    const messagesQuery = collection(firebaseStore, `chat/${docId}/messages`);
+    await addDoc(messagesQuery, messageData);
+    await pusher.trigger(roomId, type, messageData);
+    // TODO 채팅방 last message 업데이트
 
     return createSuccessResponse<SendMessageResponse>({
-      data: pusherData,
+      data: messageData,
       metaInfo: {
         status: STATE.SUCCESS,
         message: "Successfully sent message",
