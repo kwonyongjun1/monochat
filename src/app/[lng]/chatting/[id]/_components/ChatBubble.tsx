@@ -24,21 +24,30 @@ const ChatBubble = ({
           className={cn(
             "flex items-center",
             isMine && "flex-row-reverse",
-            !showSender && "hidden"
+            !showSender || (isMine && "hidden")
           )}
         >
           <span className="text-sm font-semibold text-gray-900 ">{sender}</span>
         </div>
         <div
           className={cn(
-            "flex items-center justify-center pt-2 gap-2",
+            "flex items-center  pt-2 gap-2",
             isMine && "flex-row-reverse"
           )}
         >
-          <p className="text-sm font-normal p-2.5 text-gray-900 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl">
+          <p
+            className={cn(
+              "text-sm font-normal p-2.5 text-gray-900 rounded-e-xl rounded-es-xl",
+              isMine
+                ? "border-blue-200 bg-blue-100"
+                : "border-gray-200 bg-gray-100"
+            )}
+          >
             {message}
           </p>
-          <span className="text-sm font-normal text-gray-500">{time}</span>
+          <span className="text-sm font-normal text-gray-500 self-end">
+            {time}
+          </span>
         </div>
       </div>
     </div>
