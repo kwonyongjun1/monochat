@@ -7,8 +7,8 @@ import { getDocs } from "firebase/firestore";
 import { collection } from "firebase/firestore";
 import { filterSearchParams } from "@/utils/fetch";
 import { NextRequest } from "next/server";
-import { MessageInfo } from "./types";
 import { getChatRoomDocId } from "..";
+import { MessageInfo } from "../types";
 
 export const GET = async (request: NextRequest) => {
   try {
@@ -27,6 +27,8 @@ export const GET = async (request: NextRequest) => {
         senderId: message.senderId,
         readBy: message.readBy,
         createdAt: message.createdAt,
+        roomId: roomId,
+        type: message.type,
       };
     });
 

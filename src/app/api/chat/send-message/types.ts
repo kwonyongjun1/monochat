@@ -1,15 +1,9 @@
 import { CommonResponse } from "@/app/api/types";
-import { Timestamp } from "@/types/chat";
+import { MessageInfo } from "../types";
 
-export type SendMessageRequest = MessageInfo;
+export type SendMessageRequest = MessageInfo & {
+  roomId: string;
+  type: string;
+};
 
 export type SendMessageResponse = CommonResponse<MessageInfo>;
-
-export interface MessageInfo {
-  roomId: string;
-  senderId: string;
-  senderName: string;
-  message: string;
-  type: string;
-  createdAt: Timestamp;
-}
