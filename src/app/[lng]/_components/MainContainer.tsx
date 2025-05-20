@@ -29,7 +29,7 @@ const MainContainer = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <header>{isHeaderNavVisible && <HeaderNav />}</header>
-      <main className="size-full transition-all duration-150 ease-in-out">
+      <main className="size-full overflow-auto transition-all duration-150 ease-in-out">
         {children}
       </main>
       <footer className="w-full max-w-screen-sm">
