@@ -1,5 +1,5 @@
 import { fetchWithHandling } from "@/utils/fetch";
-import { SendMessageRequest } from "../api/chat/send-message/types";
+import { SendMessageRequest } from "../../api/chat/send-message/types";
 
 export const sendMessage = async (
   request: SendMessageRequest
