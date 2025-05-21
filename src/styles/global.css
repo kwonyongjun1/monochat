@@ -1,3 +1,51 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* @import "tailwindcss-animated"; */
+
+:root {
+  --viewport-height: 100dvh;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.icon-animate:hover {
+  animation: rotate 1s infinite;
+}
+
+.fade-1s {
+  animation: fade 1s ease-in-out;
+}
+
+.icon-hover-effect {
+  transition: transform 0.3s ease, fill 0.3s ease;
+}
+
+.icon-hover-effect:hover {
+  transform: scale(0.9);
+  fill: black;
+}
+
+.bottom-border {
+  box-sizing: border-box;
+  border-width: 0;
+  border-style: solid;
+  border-color: #e5e7eb;
+}

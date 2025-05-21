@@ -3,7 +3,7 @@ import { NextRequestWithAuth } from "next-auth/middleware";
 import { NextResponse } from "next/server";
 
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico|assets).*)"],
 };
 
 export const middleware = async (req: NextRequestWithAuth) => {

@@ -4,9 +4,8 @@ const ToastProvider = () => {
   return (
     <ToastContainer
       transition={Slide}
-      position="bottom-right"
       autoClose={2000}
-      hideProgressBar={false}
+      hideProgressBar={true}
       pauseOnHover
       draggable
     />

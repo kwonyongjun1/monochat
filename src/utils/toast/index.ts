@@ -14,7 +14,7 @@ export interface ToastOptions {
 export const toast = ({
   message,
   type,
-  position = "bottom-right",
+  position = "top-center",
 }: ToastOptions) => {
   switch (type) {
     case "success":
