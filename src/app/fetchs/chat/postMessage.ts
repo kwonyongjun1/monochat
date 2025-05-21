@@ -4,7 +4,7 @@ import { fetchWithHandling } from "@/utils/fetch";
 export const postMessage = async (
   request: PostMessageRequest
 ): Promise<void> => {
-  return fetchWithHandling("/api/chat/send-message", {
+  return fetchWithHandling("/api/chat/messages", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

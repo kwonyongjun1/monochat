@@ -3,7 +3,7 @@ import {
   createErrorResponse,
   createSuccessResponse,
 } from "@/utils/api/response";
-import { addDoc, getDocs } from "firebase/firestore";
+import { addDoc, doc, getDocs, updateDoc } from "firebase/firestore";
 import { collection } from "firebase/firestore";
 import { filterSearchParams } from "@/utils/fetch";
 import { NextRequest } from "next/server";
@@ -67,8 +67,11 @@ export const POST = async (request: NextRequest) => {
     const docId = await getChatRoomDocId(roomId);
     const messagesQuery = collection(firebaseStore, `chat/${docId}/messages`);
     await addDoc(messagesQuery, messageData);
+    const chatDocRef = doc(firebaseStore, `chat/${docId}`);
+    await updateDoc(chatDocRef, {
+      lastMessage: messageData.message,
+    });
     await pusher.trigger(roomId, type, messageData);
-    // TODO 채팅방 last message 업데이트
 
     return createSuccessResponse<PostMessageResponse>({
       data: messageData,

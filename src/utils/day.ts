@@ -11,11 +11,30 @@ export const getCurrentTimeStamp = () => {
   return getTimeStamp(Date.now());
 };
 
-export const formatTimestamp = (timestamp: Timestamp) => {
+export const getFormatTimestamp = (timestamp: Timestamp) => {
   const date = new Date(
     timestamp.seconds * 1000 + Math.floor(timestamp.nanoseconds / 1e6)
   );
-  return date.toLocaleString();
+  const hours = date.getHours();
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+  const period = hours < 12 ? "오전" : "오후";
+  const formattedHours = hours % 12 || 12;
+  return `${period} ${formattedHours}:${minutes}`;
+};
+
+export const getTimeFormatDateTime = () => {};
+
+export const getDay = (timestamp: Timestamp) => {
+  const milliseconds =
+    timestamp.seconds * 1000 + timestamp.nanoseconds / 1000000;
+  const date = new Date(milliseconds);
+
+  const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
+  const dayOfWeek = daysOfWeek[date.getDay()];
+
+  return `${date.getFullYear()}년 ${
+    date.getMonth() + 1
+  }월 ${date.getDate()}일 ${dayOfWeek}요일`;
 };
 
 export const getChatRoomsformatDateTime = (timestamp: Timestamp) => {

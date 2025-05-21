@@ -37,10 +37,10 @@ const ChatBubble = ({
         >
           <p
             className={cn(
-              "text-sm font-normal p-2.5 text-gray-900 rounded-e-xl rounded-es-xl",
+              "text-sm font-normal p-2.5 text-gray-900 ",
               isMine
-                ? "border-blue-200 bg-blue-100"
-                : "border-gray-200 bg-gray-100"
+                ? "border-blue-200 bg-blue-100 rounded-s-xl rounded-ee-xl"
+                : "border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl"
             )}
           >
             {message}
