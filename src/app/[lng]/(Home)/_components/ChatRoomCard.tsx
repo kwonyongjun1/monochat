@@ -1,4 +1,5 @@
 import { ChatRoomInfo } from "@/types/chat";
+import { getChatRoomsformatDateTime } from "@/utils/day";
 
 interface ChatRoomCardProps {
   chatRoomInfo: ChatRoomInfo;
@@ -17,7 +18,9 @@ const ChatRoomCard = ({ chatRoomInfo, onClick }: ChatRoomCardProps) => {
           {chatRoomInfo.lastMessage || "\u00A0"}
         </p>
       </div>
-      {/* <p className="text-xs text-gray-500">{chatRoomInfo.lastDate}</p> */}
+      <p className="text-xs text-gray-500">
+        {getChatRoomsformatDateTime(chatRoomInfo.lastDate)}
+      </p>
     </article>
   );
 };

@@ -5,7 +5,7 @@ import { useDrag } from "react-use-gesture";
 import Dim from "@/components/Dim";
 import Link from "next/link";
 import { ChatRoomInfo } from "@/types/chat";
-import { formatTimestampToDateTime } from "@/utils/day";
+import { getChatRoomsformatDateTime } from "@/utils/day";
 
 interface BottomDrawerProps {
   chatRoomInfo: ChatRoomInfo | null;
@@ -57,7 +57,7 @@ const BottomDrawer = ({ chatRoomInfo, onClose }: BottomDrawerProps) => {
             <>
               <div>{chatRoomInfo?.roomId}</div>
               <div>{chatRoomInfo?.title}</div>
-              <div>{formatTimestampToDateTime(chatRoomInfo?.lastDate)}</div>
+              <div>{getChatRoomsformatDateTime(chatRoomInfo?.lastDate)}</div>
               <div className="flex justify-center gap-2">
                 <Link href={`/chatting/${chatRoomInfo?.roomId}`}>
                   <button

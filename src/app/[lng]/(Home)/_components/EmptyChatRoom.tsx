@@ -3,9 +3,9 @@ import animationData from "@/assets/lottie/space-drift.json";
 
 const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 
-const EmptyChatList = () => {
+const EmptyChatRoom = () => {
   return (
-    <div>
+    <div className="h-full content-center">
       <div className="flex flex-1 flex-col gap-2 place-items-center justify-center">
         <div className="w-full">
           <Lottie animationData={animationData} />
@@ -18,4 +18,4 @@ const EmptyChatList = () => {
   );
 };
 
-export default EmptyChatList;
+export default EmptyChatRoom;

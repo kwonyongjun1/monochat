@@ -18,7 +18,7 @@ export const formatTimestamp = (timestamp: Timestamp) => {
   return date.toLocaleString();
 };
 
-export const formatTimestampToDateTime = (timestamp: Timestamp) => {
+export const getChatRoomsformatDateTime = (timestamp: Timestamp) => {
   const milliseconds =
     timestamp.seconds * 1000 + timestamp.nanoseconds / 1000000;
   const date = new Date(milliseconds);

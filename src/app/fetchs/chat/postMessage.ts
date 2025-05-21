@@ -1,8 +1,8 @@
+import { PostMessageRequest } from "@/app/api/chat/messages/types";
 import { fetchWithHandling } from "@/utils/fetch";
-import { SendMessageRequest } from "../../api/chat/send-message/types";
 
-export const sendMessage = async (
-  request: SendMessageRequest
+export const postMessage = async (
+  request: PostMessageRequest
 ): Promise<void> => {
   return fetchWithHandling("/api/chat/send-message", {
     method: "POST",
