@@ -1,47 +1,62 @@
-import { getToken } from "next-auth/jwt";
-import { NextRequestWithAuth } from "next-auth/middleware";
+// import { getToken } from "next-auth/jwt";
+import withAuth, { NextRequestWithAuth } from "next-auth/middleware";
 import { NextResponse } from "next/server";
 
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico|assets).*)"],
+  matcher: ["/((?!api|auth|_next/static|_next/image|favicon.ico|assets).*)"],
 };
 
-export const middleware = async (req: NextRequestWithAuth) => {
-  const { nextUrl, headers } = req;
-  const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
-  if (!token) {
-    console.log("로그인 필요");
-  }
-  const originalUrl = req.nextUrl.href;
+const authRequiredRoutes = ["invite", "info"];
 
-  let lng: string | undefined;
-  let hasLngPath = false;
+export const middleware = withAuth(
+  async (req: NextRequestWithAuth) => {
+    const { nextUrl, headers, nextauth } = req;
+    // const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+    const originalUrl = req.nextUrl.href;
+    let lng: string | undefined;
+    let hasLngPath = false;
 
-  const languages = ["ko", "en"];
+    const languages = ["ko", "en"];
 
-  for (const language of languages) {
-    if (nextUrl.pathname.startsWith(`/${language}`)) {
-      lng = language;
-      hasLngPath = true;
-      break;
+    for (const language of languages) {
+      if (nextUrl.pathname.startsWith(`/${language}`)) {
+        lng = language;
+        hasLngPath = true;
+        break;
+      }
     }
+
+    if (!lng) {
+      const acceptLanguage = headers.get("accept-language");
+      const userLang = acceptLanguage
+        ? acceptLanguage.split(",")[0].split("-")[0]
+        : languages[0];
+      lng = userLang;
+    }
+
+    if (!hasLngPath) {
+      nextUrl.pathname = `/${lng}${nextUrl.pathname}`;
+      hasLngPath = true;
+    }
+
+    if (!nextauth.token) {
+      const route = req.nextUrl.pathname.split("/")[2];
+      if (authRequiredRoutes.includes(route)) {
+        nextUrl.pathname = `/${lng}/login/sign-in`;
+        return NextResponse.redirect(nextUrl);
+      }
+    }
+
+    const isRedirect = originalUrl !== nextUrl.href;
+    const res = isRedirect
+      ? NextResponse.redirect(nextUrl)
+      : NextResponse.next();
+
+    return res;
+  },
+  {
+    callbacks: {
+      authorized: () => true,
+    },
   }
-
-  if (!lng) {
-    const acceptLanguage = headers.get("accept-language");
-    const userLang = acceptLanguage
-      ? acceptLanguage.split(",")[0].split("-")[0]
-      : languages[0];
-    lng = userLang;
-  }
-
-  if (!hasLngPath) {
-    nextUrl.pathname = `/${lng}${nextUrl.pathname}`;
-    hasLngPath = true;
-  }
-
-  const isRedirect = originalUrl !== nextUrl.href;
-  const res = isRedirect ? NextResponse.redirect(nextUrl) : NextResponse.next();
-
-  return res;
-};
+);
