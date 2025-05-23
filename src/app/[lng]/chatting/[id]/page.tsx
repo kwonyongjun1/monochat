@@ -1,9 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useState, useRef } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import Pusher from "pusher-js";
-import { RiArrowGoBackFill } from "react-icons/ri";
 import { getChatMessages } from "@/app/fetchs/chat/getChatMessages";
 import { useQuery } from "@tanstack/react-query";
 import ChatBubble from "./_components/ChatBubble";
@@ -12,10 +11,10 @@ import { getFormatTimestamp, getDay } from "@/utils/day";
 import { MessageInfo } from "@/app/api/chat/types";
 import { PRIVATE_ENV, CHAT_EVENT } from "@/constants";
 import DateSeparator from "./_components/DateSeparator";
+import BackHeader from "@/components/BackHeader";
 
 const Chatting = () => {
   const { id: roomId } = useParams();
-  const { push } = useRouter();
   const [messageList, setMessageList] = useState<MessageInfo[]>([]);
   const mainRef = useRef<HTMLDivElement>(null);
 
@@ -63,13 +62,7 @@ const Chatting = () => {
 
   return (
     <div className="size-full flex flex-col">
-      <header className="w-full">
-        <div className="p-2">
-          <button onClick={() => push("/")}>
-            <RiArrowGoBackFill size={20} />
-          </button>
-        </div>
-      </header>
+      <BackHeader />
       <main className="size-full overflow-y-auto" ref={mainRef}>
         <article>
           {initialMessages?.data?.map((message, index) => {
