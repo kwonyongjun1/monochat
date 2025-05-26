@@ -1,14 +1,17 @@
 "use client";
 
-import { Avatar } from "@radix-ui/themes";
 import { signIn } from "next-auth/react";
 import BackHeader from "@/components/BackHeader";
+import Avatar from "@/components/Avatar";
 
 const SignIn = () => {
   return (
     <div className="size-full flex flex-col">
       <BackHeader />
       <article className="size-full px-4 py-8">
+        <h1 className="font-bold text-center">
+          SNS으로 간편하게 로그인하여 시작하세요.
+        </h1>
         <div className="flex flex-center m-4 gap-2 text-slate-300 items-center">
           <hr className="flex-1 border-slate-300" />
           <p className="font-roboto"> 소셜 로그인</p>
@@ -17,28 +20,22 @@ const SignIn = () => {
         <section className="flex gap-6 justify-center">
           <button>
             <Avatar
-              size="4"
-              radius="full"
+              size={48}
               src="/assets/symbol/google.svg"
-              fallback="A"
               className="border"
             />
           </button>
           <button onClick={() => signIn("kakao", { callbackUrl: "/" })}>
             <Avatar
-              size="4"
-              radius="full"
+              size={48}
               src="/assets/symbol/kakao.svg"
-              fallback="A"
               className="bg-yellow-300"
             />
           </button>
           <button>
             <Avatar
-              size="4"
-              radius="full"
+              size={48}
               src="/assets/symbol/naver.svg"
-              fallback="A"
               className="bg-green-500"
             />
           </button>
