@@ -9,13 +9,7 @@ const RightSidePannel = () => {
 
   return (
     <>
-      <header>
-        <nav>
-          <a className="text-2xl font-bold border-t border-t-slate-100">
-            {lng}
-          </a>
-        </nav>
-      </header>
+      <header></header>
       <div className="size-full content-center">
         {pathname === `/${lng}` && <ChatRoomPlaceholder />}
       </div>
