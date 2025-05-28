@@ -40,7 +40,7 @@ const BottomNav = () => {
           return (
             <li
               key={item.path}
-              className="flex flex-col items-center w-full icon-hover-effect text-xs cursor-pointer"
+              className="flex flex-col items-center w-full hover-effect text-xs cursor-pointer"
             >
               <Link href={item.path}>
                 <div className="w-full place-items-center">

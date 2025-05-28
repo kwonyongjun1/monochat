@@ -22,21 +22,21 @@ const SignIn = () => {
             <Avatar
               size={48}
               src="/assets/symbol/google.svg"
-              className="border"
+              className="border hover-effect"
             />
           </button>
           <button onClick={() => signIn("kakao", { callbackUrl: "/" })}>
             <Avatar
               size={48}
               src="/assets/symbol/kakao.svg"
-              className="bg-yellow-300"
+              className="bg-yellow-300 hover-effect"
             />
           </button>
           <button>
             <Avatar
               size={48}
               src="/assets/symbol/naver.svg"
-              className="bg-green-500"
+              className="bg-green-500 hover-effect"
             />
           </button>
         </section>
