@@ -1,4 +1,5 @@
 import { Noto_Sans_KR, Roboto } from "next/font/google";
+import localFont from "next/font/local";
 
 export const notoSansKr = Noto_Sans_KR({
   subsets: ["latin"],
@@ -11,8 +12,6 @@ export const roboto = Roboto({
   weight: ["100", "400", "700"],
   variable: "--roboto",
 });
-
-import localFont from "next/font/local";
 
 export const pretendard = localFont({
   src: "./PretendardVariable.ttf",

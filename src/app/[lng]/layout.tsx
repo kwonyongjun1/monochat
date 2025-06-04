@@ -31,10 +31,10 @@ export default function RootLayout({
         <GlobalProvider>
           <ToastProvider />
           <div className="flex-1 max-h-cdvh relative flex h-full max-w-screen-xl">
-            <div className="relative flex size-full flex-1 flex-col overflow-hidden text-slate-900 border-solid border-t border-t-slate-100">
+            <div className="relative flex size-full flex-1 flex-col overflow-hidden text-slate-900 border-solid border border-t-slate-100 ">
               <MainContainer>{children}</MainContainer>
             </div>
-            <div className="relative flex size-full flex-1 flex-col overflow-hidden text-slate-900 border-solid border-t border-t-slate-100 hidden md:block">
+            <div className="relative flex size-full flex-1 flex-col overflow-hidden text-slate-900 border-solid border border-t-slate-100 hidden md:block">
               <RightSidePannel />
             </div>
           </div>
